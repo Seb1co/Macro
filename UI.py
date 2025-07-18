@@ -30,13 +30,13 @@ class Macro_UI(QWidget) :
         self.start_play_key             = "Key.f8"
         self.pause_resume_key           = "Key.f9"
         self.stop_key                   = "Key.f10"
-        self.pause_key_pressed          = False     #this is used to know if the program will be paused or resumed when it is running
+        self.pause_key_pressed          = False     # this is used to know if the program will be paused or resumed when it is running
         self.recording                  = None      # the recording class instance
         self.play_instance              = None      # the playing class instance
         self.milisecunde                = 0         # the miliseconds,this is just cosmetic
         self.timer                      = QTimer()  # updates the milisecond
         self.mouse_is_pressed           = False     # this is used to know if the mouse moves should be stored(True) or not(False)
-        self.option                     = False # True for recording     False for playing
+        self.option                     = False     # True for recording     False for playing
         self.listener                   = pynput_keyboard.Listener(
                                                                     on_release= self.release_verifier
                                                                   )
