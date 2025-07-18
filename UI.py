@@ -211,10 +211,11 @@ class Macro_UI(QWidget) :
         self.recordButton.clicked.disconnect(self.recordPushed) #
         self.recordButton.clicked.connect(self.pause_pushed)    #
         self.layout.update()
-        print(self.tbox.text())
-        self.recording     = Record(self.tbox.text(),self.stop_key,self.pause_resume_key) if self.recording == None else self.recording   #sees if the recording variable exists
-                                                                                                                                  # if it exists then it remains the same
-                                                                                                                                  # if it doesn't exist it initializes the Record class from the Macro.py
+        if self.recording == None:                                                                          # sees if the recording variable exists
+            self.recording          = Record(self.tbox.text(),self.stop_key,self.pause_resume_key)          # if it doesn't exist it initializes the Record class from the Macro.py
+        else:
+            self.recording.create_file(self.tbox.text())                                                    # if it exists then it will change the name of the file where the instructions will be written
+
         if self.listener.is_alive():                                                            #
             self.listener.stop()                                                                #
         self.listener      = pynput_keyboard.Listener(                                          #

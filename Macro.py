@@ -79,7 +79,12 @@ class Record:
         self.mouse_buffer = []    # Stores all the movements of the mouse while it is being pressed
         self.txtFile = ""         # The file wich contains all the Macros
         self.number_of_folder = 0 # The number of the current "non-named" folder
+        self.create_file(txtFile) # Creates the file if it doesn't exist else putting the number of times it appears in the Macros folder
 
+
+
+    def create_file(self,txtFile):
+        """Used for creating a macro file with the name introduced in the textbox,if no name was given the file will be named Macro """
         if txtFile == "":                                #Creating the folder with the given name in the Label
             print(True)
             fileNames = os.listdir("Macros")    #   fileNames is a list that will contain all the names of the files that are in the Macros folder
@@ -97,7 +102,6 @@ class Record:
             print(str(self.number_of_folder))
             self.txtFile = f"Macros/{txtFile}{self.number_of_folder}.txt" if self.number_of_folder > 0 else f"Macros/{txtFile}.txt"
             open(self.txtFile, "a").close()                                 #/Creating the folder with the given name in the Label
-
 
         #Keyboard related stuff
 
@@ -184,8 +188,8 @@ class Record:
         self.write_to_file()
         self.keyList.clear()
         self.mouse_list.clear()
-        self.number_of_folder += 1
-        self.txtFile           = f"Macros/Macro{self.number_of_folder + 1}.txt"
+        self.number_of_folder = 0
+        self.txtFile          = ""
 
 
 
