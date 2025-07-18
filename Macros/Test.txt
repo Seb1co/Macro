@@ -1,0 +1,12 @@
+mouse_click:Button.left:170:405:406:185:405:406
+keyboard:'y':190:192
+keyboard:'o':230:235
+keyboard:Key.space:325:330
+keyboard:'w':350:355
+keyboard:'s':400:405
+keyboard:'g':450:455
+keyboard:Key.ctrl_l:1500:1530
+keyboard:Key.shift_l:1510:1533
+keyboard:Key.left:1520:1534
+keyboard:Key.backspace:1540
+
