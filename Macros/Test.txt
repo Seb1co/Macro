@@ -8,5 +8,5 @@ keyboard:'g':450:455
 keyboard:Key.ctrl_l:1500:1530
 keyboard:Key.shift_l:1510:1533
 keyboard:Key.left:1520:1534
-keyboard:Key.backspace:1540
-
+keyboard:Key.left:1525:1539
+keyboard:Key.backspace:1540:1545
