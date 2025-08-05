@@ -86,7 +86,6 @@ class Record:
     def create_file(self,txtFile):
         """Used for creating a macro file with the name introduced in the textbox,if no name was given the file will be named Macro """
         if txtFile == "":                                #Creating the folder with the given name in the Label
-            print(True)
             fileNames = os.listdir("Macros")    #   fileNames is a list that will contain all the names of the files that are in the Macros folder
             for fileName in fileNames:
                 if "Macro" in fileName:
@@ -94,12 +93,10 @@ class Record:
             self.txtFile = f"Macros/Macro{self.number_of_folder + 1}.txt"
             open(self.txtFile, "a").close()                 #this is used to create the file and leaving it empty for future writing
         else:
-            print(False)
             fileNames = os.listdir("Macros")  # fileNames is a list that will contain all the names of the files that are in the Macros folder
             for fileName in fileNames:
                 if txtFile in fileName:
                     self.number_of_folder += 1
-            print(str(self.number_of_folder))
             self.txtFile = f"Macros/{txtFile}{self.number_of_folder}.txt" if self.number_of_folder > 0 else f"Macros/{txtFile}.txt"
             open(self.txtFile, "a").close()                                 #/Creating the folder with the given name in the Label
 
@@ -117,7 +114,7 @@ class Record:
                 if k.name == key and k.time_when_released == 0:
                     return
             self.keyList.append(Keys(key, milisecunde))
-            print("A fost apasata tasta " + str(key) + " la milisecunda " + str(milisecunde))
+            print("The key: " + str(key) + "was pressed at the millisecond " + str(milisecunde))
 
     def key_released(self, key=None, milisecunde=0):
         """
@@ -129,7 +126,7 @@ class Record:
         for k in reversed(self.keyList):
             if k.name == key and k.time_when_released == 0:
                 k.set_released_time(milisecunde)
-                print("A fost lasata tasta " + str(key) + " la milisecunda " + str(milisecunde))
+                print("The key " + str(key) + "was released at the millisecond " + str(milisecunde))
                 break
 
 
@@ -139,7 +136,7 @@ class Record:
 
     def mouse_pressed(self,x=0,y=0,button=None,time_when_pressed=0):
         """Adds the mouse event to the mouse list as a Mouse class object"""
-        print("a fost apasat butonul MOUSE ULUI " + str(button) + " la milisecunda " + str(time_when_pressed))
+        print("The mouse button " + str(button) + "was pressed at the millisecond " + str(time_when_pressed))
         for m in reversed(self.mouse_list):
             if m.button == button and m.time_when_released == 0:
                 return
@@ -147,12 +144,12 @@ class Record:
 
     def mouse_moved(self,x=0,y=0,milisecond=0):
         """Adds the mouse event to the mouse buffer list"""
-        print("Mouse ul s a miscat la coordonatele " + str(x) + " " + str(y) + " la milisecunda " + str(milisecond))
+        print("The mouse was moved to the coordinates x:" + str(x) + " y:" + str(y) + " at the millisecond " + str(milisecond))
         self.mouse_buffer.append("mouse_move" + ":" + str(milisecond) + ":" + str(x) + ":" + str(y) + "\n")
 
     def mouse_released(self,x=0,y=0,button=None,time_when_released=0):
         """Updates the button from the mouse list with the coordinates and the time when it was released"""
-        print("a fost lasat butonul MOUSE ULUI " + str(button) + " la milisecunda " + str(time_when_released) + "la coordonatele " + str(x) + " " + str(y))
+        print("The mouse button " + str(button) + " was released at the millisecond " + str(time_when_released) + " at the coordinates x:" + str(x) + " y:" + str(y))
         for m in reversed(self.mouse_list):
             if m.button == button and m.time_when_released == 0:
                 m.released(time_when_released,x,y)
@@ -254,7 +251,6 @@ class Play:
         elif current_object[0] == "mouse_click":
             if self.milisecunde == int(current_object[2]):
                 print("mouse_click")
-                #print(current_object[1])
                 button = getattr(Button,current_object[1].split(".")[1])            # getting the button atribute from the string in the file
                 dx = int(current_object[3]) - self.m_controller().position[0]       # sets the distance that the mouse should go on the x axis by subtracting the position from the file with the current position of the mouse
                 dy = int(current_object[4]) - self.m_controller().position[1]       # sets the distance that the mouse should go on the y axis by subtracting the position from the file with the current position of the mouse
@@ -285,45 +281,45 @@ class Play:
         with open(file_name,"r") as reader:
             for line in reader:
                 self.key_list.append(line.split("\n")[0]) if line != "" else None       #if it isn't the end of the file it will append the instruction to the list
-            print("Am umplut lista aceasta are lungimea de " + str(len(self.key_list)))
+            print("I filled the list with the length of " + str(len(self.key_list)))
         return
 
     def k_press(self,key,timelapse=0):
         """This will be called as a thread and will press the key for the given timelapse"""
-        print("numele meu este thread ul " + str(threading.current_thread()))
+        print("My name is " + str(threading.current_thread()))
         k_controller = keyboard_controller()
         k_controller.press(key)
-        print("Am apasat tasta " + str(key) + " la milisecunda " + str(self.milisecunde))
+        print("I pressed the key " + str(key) + " at the millisecond " + str(self.milisecunde))
 
         time.sleep(timelapse / 1000)
 
         k_controller.release(key)
-        print("Am lasat tasta " + str(key) + " la milisecunda " + str(self.milisecunde))
+        print("I released the key " + str(key) + " at the millisecond " + str(self.milisecunde))
 
 
 
     def m_press(self, button, timelapse=0):
         """This will be called as a thread and will press the button for the given timelapse"""
-        print("numele meu este thread ul " + str(threading.current_thread()))
+        print("My name is " + str(threading.current_thread()))
         m_controller = mouse_controller()
         m_controller.press(button)
 
-        print("Am apasat butonul " + str(button) + " la milisecunda " + str(self.milisecunde))
+        print("I pressed the button " + str(button) + " at the millisecond " + str(self.milisecunde))
 
         time.sleep(timelapse / 1000)
 
         m_controller.release(button)
-        print("Am lasat butonul " + str(button) + " la milisecunda " + str(self.milisecunde))
+        print("I released the key " + str(button) + " at the millisecond " + str(self.milisecunde))
 
     def m_move(self,x=0,y=0):
         """This will be called as a thread and will move the mouse by x points on the x axis and y points on the y axis"""
-        print("numele meu este thread ul " + str(threading.current_thread()))
+        print("My name is " + str(threading.current_thread()))
         try:
             m_controller = mouse_controller()
             m_controller.move(x,y)
         except Exception as exec:
             print(exec)
-        print(f"Am mutat mouse ul cu {x} pixeli pe orizontala si cu {y} pe verticala")
+        print(f"I moved the mouse with {x} pixels horizontaly and with {y} pixels vertically")
 
     def clear(self):
         """Clears all the variables from the current instance of the class(this is necesarry only if u want to)"""
@@ -332,5 +328,6 @@ class Play:
         self.key_list.clear()
         self.file = ""
         self.milisecunde = 0
+
 
 
