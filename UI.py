@@ -229,7 +229,7 @@ class Macro_UI(QWidget) :
         self.mouselistener.start()  #
         self.listener.start()       # Starts the listeners
         self.timer.start(1)
-        print("A inceput filmarea tastaturii")
+        print("The recording of the keyboard has started")
 
     def timer_tick(self):
         """Is runned trough every tick and updates the current millisecond"""
@@ -260,7 +260,7 @@ class Macro_UI(QWidget) :
 
     def stop_for_record(self):
         """Safely clears all the things that the Record class needed and puts the program in a neutral state"""
-        print("Filmarea tastaturii s-a terminat")
+        print("The recording of the keyboard has stopped")
         if self.listener.is_alive() and self.mouselistener.is_alive():
             self.listener.stop()
             self.mouselistener.stop()
@@ -304,7 +304,7 @@ class Macro_UI(QWidget) :
             self.playButton.clicked.disconnect(self.play_start)     #   Sets the behaviour for the Pause button
             self.playButton.clicked.connect(self.pause_pushed)      #
             self.layout.update()
-            print("A inceput Macro ul")
+            print("The Macro has started")
         else:       #if the there was no file selected then raises an error message
             msg = QMessageBox()
             msg.setWindowTitle("Error")
@@ -333,3 +333,4 @@ class Macro_UI(QWidget) :
         self.play_instance.clear()      #Clears all the things that were used inside the Play class
 
     #/Play stuff
+
